@@ -41,9 +41,25 @@ if (-not $Message) { $Message = "Update files ($tag)" }
 git commit --quiet -m $Message; Assert-Ok 'git commit'
 git push --quiet origin HEAD; Assert-Ok 'git push'
 
-# 5. Publish the release with the three files attached
+# 5. Bundle the three files into one zip. GitHub strips Korean characters from
+#    release asset names, so the asset gets an ASCII name and the files inside
+#    keep their original Korean names.
+$stage = Join-Path ([IO.Path]::GetTempPath()) ("html-ir-" + [Guid]::NewGuid())
+$bundleDir = Join-Path $stage 'files'
+New-Item -ItemType Directory -Path $bundleDir | Out-Null
+$files | ForEach-Object { Copy-Item -LiteralPath $_.FullName -Destination $bundleDir }
+$bundle = Join-Path $stage 'HTML_IR_kit.zip'
+Add-Type -AssemblyName System.IO.Compression.FileSystem
+[IO.Compression.ZipFile]::CreateFromDirectory($bundleDir, $bundle, [IO.Compression.CompressionLevel]::Optimal, $false, [Text.Encoding]::UTF8)
+
+# 6. Publish the release with the bundle attached
 $firstLine = ($Message -split "`r?`n")[0]
-gh release create $tag @($files.FullName) --title "$tag" --notes "$firstLine" --latest; Assert-Ok 'gh release create'
+try {
+    gh release create $tag $bundle --title "$tag" --notes "$firstLine" --latest; Assert-Ok 'gh release create'
+}
+finally {
+    Remove-Item -LiteralPath $stage -Recurse -Force
+}
 
 Write-Host ""
 Write-Host "Deployed $tag"
