@@ -10,12 +10,12 @@
 
 ## 최신본 받기
 
-**▶ [세 파일 한 번에 받기 (HTML_IR_kit.zip)](https://github.com/JuYuongOh/html-ir-conversion-kit/releases/latest/download/HTML_IR_kit.zip)**
+**▶ [세 파일 한 번에 받기 (HTML_IR_kit.zip)](https://github.com/newparadigm-investment/html-ir-conversion-kit/releases/latest/download/HTML_IR_kit.zip)**
 
 - 위 링크는 바뀌지 않습니다. 언제 누르든 가장 최근에 배포된 파일이 받아집니다.
 - 압축을 풀면 위 세 파일이 원래 이름 그대로 들어 있습니다.
 - 한 파일만 필요하면 이 페이지 위쪽 파일 목록에서 파일을 누른 뒤, 오른쪽 위의 다운로드 버튼(Download raw file)을 누르세요.
-- 버전별 변경 내용과 이전 버전은 [Releases](https://github.com/JuYuongOh/html-ir-conversion-kit/releases)에서 볼 수 있습니다.
+- 버전별 변경 내용과 이전 버전은 [Releases](https://github.com/newparadigm-investment/html-ir-conversion-kit/releases)에서 볼 수 있습니다.
 
 ## 배포하는 방법 (관리자용)
 
